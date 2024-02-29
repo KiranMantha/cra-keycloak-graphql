@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-require('dotenv').config({ path: './env/.env' });
+require('dotenv').config({ path: './.env' });
 const { CracoAliasPlugin } = require('react-app-alias');
 
 module.exports = {
