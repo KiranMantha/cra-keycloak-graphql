@@ -30,11 +30,6 @@ export function Nav() {
                   <button onClick={() => keycloak.logout()}>Logout</button>
                 </li>
               </ul>
-              <div className="hidden xl:flex items-center space-x-5">
-                <div className="hover:text-gray-200">
-                  <h1>Login</h1>
-                </div>
-              </div>
             </div>
           </nav>
         </section>
