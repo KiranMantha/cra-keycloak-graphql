@@ -49,9 +49,12 @@ docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin
 - once the container is created, we can run it from docker desktop containers from next time. this will also prevent unnecessary container duplications.
 - navigate to above localhost and navigate to administration console and login as admin.
 
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-landing-page.png)
+
 ### Create realm
 
 - create a realm from `master` dropdown with name `keycloak-react-auth`
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-realm-dropdown.png)
 
 ### Create client
 
@@ -67,10 +70,14 @@ docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin
     * `Valid post logout redirect URIs: <frontend-application-default-url> (in our case localhost:3000/home)`
     * `Web origins: <frontend-application-url> (in our case localhost:3000)`
 
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-create-client.png)
+
 ### Create client roles
 
 - Each client can contain different roles which are assigned to different users. these are more like permissions that a user can have.
 - to create a role: navigate to `Roles` tab in above client and click on `Create Role`. provide a hyphen-seperated value
+
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-realm-details-client-roles.png)
 
 ### Create realm roles
 
@@ -85,20 +92,32 @@ docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin
     * select our new client role and save.
 - With this, we created a realm role and assigned some client roles to it.
 
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-realm-roles.png)
+
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-realm-role-details.png)
+
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-set-client-roles-to-realm-roles.png)
+
 ### Create a user
 
 - A user in keycloak is associated to realm role which in turn have specific set of permissions (client roles). 
 - To create a user, navigate to above realm and click on `Users` in side bar navigation.
 - Click on `Add user`. provide `username`, `first name`, `last name` and ignore email verified. save user.
 
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-create-user.png)
+
 #### Setting password
 - To set up password for new user, navigate to new user from users list.
 - navigate to `Credentials` tab and add password
+
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-set-new-user-credentials.png)
 
 #### Setting realm role
 - To set a realm role, navigate to new user from users list. 
 - navigate to `Role mapping` tab and click on `Assign role`
 - this opens a modal dialog with our realm role aloong with other default realm roles. select our realm role and save.
 - with this, we created the user with specific role which has specific permissions.
+
+![](https://github.com/KiranMantha/gist-images/blob/main/keycloak/keycloak-assign-role-to-user.png)
 
 
