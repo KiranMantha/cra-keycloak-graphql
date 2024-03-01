@@ -38,3 +38,65 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Keycloak setup
+
+- install docker
+- in order to run keycloak in a docker container, run the below command: 
+`docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev`
+- the above command will pull latest keycloak and run it on `localhost:8080`
+- once the container is created, we can run it from docker desktop containers from next time. this will also prevent unnecessary container duplications.
+- navigate to above localhost and navigate to administration console and login as admin.
+
+### Create realm
+
+- create a realm from `master` dropdown with name `keycloak-react-auth`
+
+### Create client
+
+- A realm can have multiple clients. frontend application needs a client along with realm to perform login actions.
+- To create a `client`, navigate to above realm from master dropdown.
+- click on `Clients` in side navigation and click on `Create client`. This opens a wizard:
+    * in 1st step, provide `Client id: <hyphen-delimited-value> (in our case, React-auth)`
+    * keep defaults in next steps and create client.
+
+
+- after client creation, navigate to `Settings` tab in above realm and set below things in `Access Settings` section:
+    * `Valid redirect URIs: <frontend-application-protected-url> (in our case localhost:3000/about)`
+    * `Valid post logout redirect URIs: <frontend-application-default-url> (in our case localhost:3000/home)`
+    * `Web origins: <frontend-application-url> (in our case localhost:3000)`
+
+### Create client roles
+
+- Each client can contain different roles which are assigned to different users. these are more like permissions that a user can have.
+- to create a role: navigate to `Roles` tab in above client and click on `Create Role`. provide a hyphen-seperated value
+
+### Create realm roles
+
+- Realm roles are super set of client roles. A realm role can contain multiple client roles. 
+- To create a realm role, navigate to above realm.
+- click on `Realm roles` in side bar navigation and click on `Create role`. 
+- provide a hypen-seperated role name and save.
+- to assign client roles to a given realm role, navigate to above role from the list of realm roles. 
+    * click on `Action` dropdown in top-right corner and click on `Add associated roles`
+    * this opens a modal dialog with filter dropdown, search and list of roles
+    * click on filter and select `Filter by clients`. this should show our client role which we created above along with defaults.
+    * select our new client role and save.
+- With this, we created a realm role and assigned some client roles to it.
+
+### Create a user
+
+- A user in keycloak is associated to realm role which in turn have specific set of permissions (client roles). 
+- To create a user, navigate to above realm and click on `Users` in side bar navigation.
+- Click on `Add user`. provide `username`, `first name`, `last name` and ignore email verified. save user.
+
+#### Setting password
+- To set up password for new user, navigate to new user from users list.
+- navigate to `Credentials` tab and add password
+
+#### Setting realm role
+- To set a realm role, navigate to new user from users list. 
+- navigate to `Role mapping` tab and click on `Assign role`
+- this opens a modal dialog with our realm role aloong with other default realm roles. select our realm role and save.
+- with this, we created the user with specific role which has specific permissions.
+
+
