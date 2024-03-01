@@ -42,7 +42,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 - install docker
 - in order to run keycloak in a docker container, run the below command: 
-`docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev`
+```bash
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
+```
 - the above command will pull latest keycloak and run it on `localhost:8080`
 - once the container is created, we can run it from docker desktop containers from next time. this will also prevent unnecessary container duplications.
 - navigate to above localhost and navigate to administration console and login as admin.
